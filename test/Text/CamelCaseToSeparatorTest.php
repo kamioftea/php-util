@@ -6,7 +6,7 @@
  * Time: 13:25
  */
 
-namespace HTC\PhinxExtensions\Util\Text;
+namespace Goblinoid\Util\Text;
 
 class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
 {

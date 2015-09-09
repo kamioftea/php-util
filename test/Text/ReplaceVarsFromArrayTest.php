@@ -6,7 +6,7 @@
  * Time: 15:08
  */
 
-namespace HTC\PhinxExtensions\Util\Text;
+namespace Goblinoid\Util\Text;
 
 class ReplaceVarsFromArrayTest extends \PHPUnit_Framework_TestCase
 {

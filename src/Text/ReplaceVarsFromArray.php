@@ -1,24 +1,25 @@
 <?php
-/**
-* Created by PhpStorm.
-* User: jeff
-* Date: 06/08/2015
-* Time: 14:25
-*/
+    /**
+     * Created by PhpStorm.
+     * User: jeff
+     * Date: 06/08/2015
+     * Time: 14:25
+     */
 
-namespace HTC\PhinxExtensions\Util\Text;
+    namespace Goblinoid\Util\Text;
 
-class ReplaceVarsFromArray
-{
-    private $template;
-    private $allow_numerical_keys = false;
-
-    public function __construct($template = null)
+    class ReplaceVarsFromArray
     {
-        if ($template !== null) {
-            $this->setTemplate($template);
+        private $template;
+        private $allow_numerical_keys = false;
+
+        public function __construct($template = null)
+        {
+            if ($template !== null)
+            {
+                $this->setTemplate($template);
+            }
         }
-    }
 
         /**
          * @param array $array
@@ -35,7 +36,8 @@ class ReplaceVarsFromArray
          */
         public function apply(array $array)
         {
-            if ($this->getTemplate() === null) {
+            if ($this->getTemplate() === null)
+            {
                 throw new \BadMethodCallException('Template must be set before applying to an array');
             }
 
@@ -45,8 +47,10 @@ class ReplaceVarsFromArray
 
             return preg_replace_callback(
                 $pattern,
-                function ($match) use ($array) {
-                    if (!array_key_exists($match['name'], $array)) {
+                function ($match) use ($array)
+                {
+                    if (!array_key_exists($match['name'], $array))
+                    {
                         throw new \InvalidArgumentException("'{$match['name']}' was not present in the provided array");
                     }
 
@@ -72,7 +76,8 @@ class ReplaceVarsFromArray
          */
         public function setTemplate($template)
         {
-            if (!is_string($template)) {
+            if (!is_string($template))
+            {
                 throw new \InvalidArgumentException('$template should be a string');
             }
             $this->template = $template;
@@ -98,4 +103,4 @@ class ReplaceVarsFromArray
 
             return $this;
         }
-}
+    }

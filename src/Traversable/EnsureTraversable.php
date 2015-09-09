@@ -6,7 +6,7 @@
  * Time: 15:18
  */
 
-namespace HTC\PhinxExtensions\Util\Traversable;
+namespace Goblinoid\Util\Traversable;
 
 class EnsureTraversable
 {

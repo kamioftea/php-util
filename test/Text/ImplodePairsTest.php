@@ -6,7 +6,7 @@
  * Time: 12:46
  */
 
-namespace HTC\PhinxExtensions\Util\Text;
+namespace Goblinoid\Util\Text;
 
 class ImplodePairsTest extends \PHPUnit_Framework_TestCase
 {

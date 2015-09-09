@@ -1,17 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeff
- * Date: 06/08/2015
- * Time: 12:31
- */
+    /**
+     * Created by PhpStorm.
+     * User: jeff
+     * Date: 06/08/2015
+     * Time: 12:31
+     */
 
-namespace HTC\PhinxExtensions\Util\Text;
+    namespace Goblinoid\Util\Text;
 
-class ImplodePairs
-{
-    private $pair_glue = ', ';
-    private $format = '$key="$value"';
+    class ImplodePairs
+    {
+        private $pair_glue = ', ';
+        private $format = '$key="$value"';
 
         /**
          * alias for filter
@@ -37,15 +37,18 @@ class ImplodePairs
             $pair_glue = $pair_glue !== null ? $pair_glue : $this->getPairGlue();
             $format = $format !== null ? $format : $this->getFormat();
 
-            array_walk($array, function (&$value, $key) use ($format) {
+            array_walk($array, function (&$value, $key) use ($format)
+            {
                 $value = preg_replace_callback(
                     '/(\\$+)(key|value)/',
-                    function ($matches) use ($key, $value) {
+                    function ($matches) use ($key, $value)
+                    {
                         list(, $dollars, $var) = $matches;
 
                         $prefix = substr($dollars, 0, floor(strlen($dollars) / 2));
 
-                        if (strlen($dollars) % 2 === 0) {
+                        if (strlen($dollars) % 2 === 0)
+                        {
                             return $prefix . $var;
                         }
 
@@ -93,4 +96,4 @@ class ImplodePairs
 
             return $this;
         }
-}
+    }

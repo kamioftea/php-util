@@ -1,5 +1,5 @@
 <?php
-namespace HTC\PhinxExtensions\Util\Text;
+namespace Goblinoid\Util\Text;
 
 /**
  * Description of CamelCaseToSeparator

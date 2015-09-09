@@ -6,7 +6,7 @@
  * Time: 15:21
  */
 
-namespace HTC\PhinxExtensions\Util\Traversable;
+namespace Goblinoid\Util\Traversable;
 
 class EnsureTraversableTest extends \PHPUnit_Framework_TestCase
 {
