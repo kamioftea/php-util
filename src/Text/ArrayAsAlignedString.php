@@ -30,4 +30,9 @@
 			return implode(PHP_EOL, $output);
 		}
 
+		public function __invoke(array $array)
+		{
+			return $this->apply($array);
+		}
+
 	}

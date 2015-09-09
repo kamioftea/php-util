@@ -46,10 +46,10 @@
                                   'Much Longer Key: Has a Value',
                 ],
                 'MB Safe' => [
-                    'array' => ['Hello' => 'World', 'ï¿½' => 'Euro', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' => 'Euros'],
+                    'array' => ['Hello' => 'World', '€' => 'Euro', '€€€€€€€' => 'Euros'],
                     'expected' => 'Hello:   World' . PHP_EOL .
-                                  'ï¿½:       Euro' . PHP_EOL .
-                                  'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: Euros',
+                                  '€:       Euro' . PHP_EOL .
+                                  '€€€€€€€: Euros',
                 ],
                 'Indents subsequent lines - basic' => [
                     'array' => ['Hello' => 'World' . PHP_EOL . 'Universe'],
