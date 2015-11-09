@@ -42,10 +42,10 @@
             }
 
             $pattern = $this->getAllowNumericalKeys()
-                ? '/(^\\h*)?(\\{)?\\$(\\{)?(?P<name>[a-zA-Z0-9_\x7f-\xff]*)(?(2)\\}|(?(3)\\}|))/m'
-                : '/(^\\h*)?(\\{)?\\$(\\{)?(?P<name>[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)(?(2)\\}|(?(3)\\}|))/m';
+                ? '/(^\\h*)?(\\{)?(?<!\$)\\$(\\{)?(?P<name>[a-zA-Z0-9_\x7f-\xff]*)(?(2)\\}|(?(3)\\}|))/m'
+                : '/(^\\h*)?(\\{)?(?<!\$)\\$(\\{)?(?P<name>[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)(?(2)\\}|(?(3)\\}|))/m';
 
-            return preg_replace_callback(
+            $replaced = preg_replace_callback(
                 $pattern,
                 function ($match) use ($array)
                 {
@@ -60,6 +60,8 @@
                 },
                 $this->getTemplate()
             );
+
+            return preg_replace('/\\$\\$/', '$', $replaced);
         }
 
         /**

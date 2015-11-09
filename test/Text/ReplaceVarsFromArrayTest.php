@@ -148,4 +148,34 @@ EOD;
 
         $this->assertEquals('hello world', $result);
     }
+
+    /**
+     * @dataProvider dollarTestStrings
+     *
+     * @param $pattern
+     * @param $expected
+     */
+    public function testCanEscapeDollars($pattern, $expected)
+    {
+        $replace_vars = new ReplaceVarsFromArray($pattern);
+
+        $result = $replace_vars(['test' => 'data']);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * non-escaped $test should be mapped to 'data'
+     *
+     * @return array
+     */
+    public function dollarTestStrings()
+    {
+        return [
+            'basic escaping' => ['$$test', '$test'],
+            'triple escapes' => ['$$$test', '$$test'],
+            'quad escapes' => ['$$$$test', '$$test'],
+            'mixed' => ['$${$test}', '$data'],
+        ];
+    }
 }
