@@ -92,7 +92,7 @@
 		 */
 		public static function forFunction($function)
 		{
-			if (!function_exists($function))
+			if (!is_callable($function) && !function_exists($function))
 			{
 				$message = (new ReplaceVarsFromArray('Error building parameters, Function {$method_name} does not exist'))
 					->apply(['method_name' => $function]);

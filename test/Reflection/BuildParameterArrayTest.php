@@ -254,6 +254,16 @@
 			$output = BuildParameterArray::forMethod(BuildParameterTestClass::class, 'testMethod')->apply($data);
 			$this->assertEquals(array_values($data), $output);
 		}
+
+		public function testReflectsAnonymousFunction()
+		{
+			$function = function($req, $opt = 23){};
+			$data = ['req' => 'data'];
+			$expected = ['data', 23];
+
+			$output = BuildParameterArray::forFunction($function)->apply($data);
+			$this->assertEquals($expected, $output);
+		}
 	}
 
 	class BuildParameterTestClass
