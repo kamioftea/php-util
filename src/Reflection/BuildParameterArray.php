@@ -74,7 +74,8 @@
 
 			if (!$reflection_class->hasMethod($method))
 			{
-				$message = (new ReplaceVarsFromArray('Error building parameters, Method {$method_name} does not exist'))
+				$template = 'Error building parameters, Method {$method_name} does not exist';
+				$message = (new ReplaceVarsFromArray($template))
 					->apply(['method_name' => $method_name]);
 
 				throw new \ReflectionException($message);
@@ -92,12 +93,21 @@
 		 */
 		public static function forFunction($function)
 		{
-			if (!is_callable($function) && !function_exists($function))
+			if (!is_callable($function))
 			{
-				$message = (new ReplaceVarsFromArray('Error building parameters, Function {$method_name} does not exist'))
+				$template = 'Error building parameters, Function {$method_name} does not exist';
+				$message = (new ReplaceVarsFromArray($template))
 					->apply(['method_name' => $function]);
 
 				throw new \ReflectionException($message);
+			}
+
+			// Allow for [$class, $method] callable syntax which doesn't work with
+			// ReflectionFunction.
+			if(is_array($function))
+			{
+				list($class, $method) = $function;
+				return static::forMethod($class, $method);
 			}
 
 			$reflection_function = new \ReflectionFunction($function);

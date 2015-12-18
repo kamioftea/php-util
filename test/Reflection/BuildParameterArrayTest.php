@@ -264,13 +264,63 @@
 			$output = BuildParameterArray::forFunction($function)->apply($data);
 			$this->assertEquals($expected, $output);
 		}
+
+		public function testReflectsAnonymousFunctionFromProperty()
+		{
+			$class= new BuildParameterTestClass();
+			$class->setCallback(function($req, $opt = 23){});
+
+			$data = ['req' => 'data'];
+			$expected = ['data', 23];
+
+			$output = BuildParameterArray::forFunction($class->getCallback())->apply($data);
+			$this->assertEquals($expected, $output);
+		}
+
+		public function testReflectsMethodReference()
+		{
+			$data = [
+				'arg_1' => 'arg_1',
+				'arg_2' => ['arg_2'],
+				'arg_3' => 'strtolower',
+				'arg_4' => new BuildParameterTestClass(),
+				'arg_5' => false,
+			];
+			$expected = array_values($data);
+
+			$class = new BuildParameterTestClass();
+
+			$output = BuildParameterArray::forFunction([$class, 'testMethod'])->apply($data);
+			$this->assertEquals($expected, $output);
+		}
 	}
 
 	class BuildParameterTestClass
 	{
+		private $callback;
+
 		function testMethod($arg_1, array $arg_2, callable $arg_3, BuildParameterTestClass $arg_4 = null, $arg_5 = true)
 		{
 
+		}
+
+		/**
+		 * @return mixed
+		 */
+		public function getCallback()
+		{
+			return $this->callback;
+		}
+
+		/**
+		 * @param mixed $callback
+		 * @return $this
+		 */
+		public function setCallback($callback)
+		{
+			$this->callback = $callback;
+
+			return $this;
 		}
 	}
 
